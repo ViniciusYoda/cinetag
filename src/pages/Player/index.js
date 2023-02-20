@@ -4,12 +4,19 @@ import Titulo from 'components/Titulo';
 import { useParams } from 'react-router-dom';
 import videos from 'db.json';
 import NaoEncontrada from 'pages/NaoEncontrada';
+import {useState, useEffect} from "react";
 
 export default function Player() {
+   const [video, setVideo] = useState();
    const parametros = useParams();
-   const video = videos.find((video) => {
-      return video.id === Number(parametros.id);
-   })
+   
+   useEffect(() => {
+      fetch(`?id=${parametros.id}`)
+         .then(resposta => resposta.json())
+         .then(dados => {
+            setVideo(...dados)
+         })
+   }, [])
 
    if (!video) {
       return <NaoEncontrada />
