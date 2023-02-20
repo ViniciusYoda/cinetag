@@ -11,7 +11,7 @@ export default function Player() {
    const parametros = useParams();
    
    useEffect(() => {
-      fetch(`?id=${parametros.id}`)
+      fetch(`https://my-json-server.typicode.com/monicahillman/cinetag-api/videos?id=${parametros.id}`)
          .then(resposta => resposta.json())
          .then(dados => {
             setVideo(...dados)
